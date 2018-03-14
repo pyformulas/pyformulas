@@ -18,12 +18,14 @@ class play:
 
         bitrate = round(self.bitrate)
         if self.duration is not None:
-            bits = len(wavedata)
+            bits = len(wavedata) * 8
             bitrate = round(bits / self.duration)
+
+        sample_rate = round(bitrate/8)
 
         stream = pa.open(format=pa.get_format_from_width(1),
                          channels=1,
-                         rate=bitrate,
+                         rate=sample_rate,
                          output=True)
 
         stream.write(wavedata)
