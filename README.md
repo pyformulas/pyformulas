@@ -1,2 +1,2 @@
 # pyformulas
-## A collection of ready-to-go Python formulas 
+### A collection of ready-to-go Python formulas 
