@@ -35,8 +35,8 @@ class screen:
 
 class audio:
     class play:
-        def __init__(self, wavedata, bitrate=2.56e5, duration=None):  # TODO: restrict bitrate based on pyaudio limits
-            self.wavedata = wavedata
+        def __init__(self, wavedata, bitrate=None, duration=None):  # TODO: restrict bitrate based on pyaudio limits
+            self.wavedata = bytes(wavedata)
             self.bitrate = bitrate
             self.duration = duration
 
@@ -50,21 +50,21 @@ class audio:
 
             # if hasattr(wavedata, 'shape'):TODO
 
-            wavedata = bytes(self.wavedata)
+            if self.bitrate is None and self.duration is None:
+                raise ValueError("Must set either bitrate or duration")
 
-            bitrate = round(self.bitrate)
             if self.duration is not None:
-                bits = len(wavedata) * 8
-                bitrate = round(bits / self.duration)
+                bits = len(self.wavedata) * 8
+                self.bitrate = bits / self.duration
 
-            sample_rate = round(bitrate / 8)
+            sample_rate = round(self.bitrate / 8)
 
             stream = pa.open(format=pa.get_format_from_width(1),
                              channels=1,
                              rate=sample_rate,
                              output=True)
 
-            stream.write(wavedata)
+            stream.write(self.wavedata)
             stream.stop_stream()
             stream.close()
             pa.terminate()
