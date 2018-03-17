@@ -7,4 +7,4 @@ screen = pf.screen(canvas)
 
 while screen.exists():
     canvas += 1
-    screen.update(canvas=canvas)
+    screen.update()
