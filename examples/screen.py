@@ -8,3 +8,5 @@ screen = pf.screen(canvas)
 while screen.exists():
     canvas += 1
     screen.update()
+
+#screen.close()
