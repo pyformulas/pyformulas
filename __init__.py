@@ -27,3 +27,9 @@ def thread(function, args=(), kwargs={}):
     globals()['thread'] = thread
 
     return thread(function, args, kwargs)
+
+def settimeout(function, delay, repeat=False, args=(), kwargs={}):
+    from _formulas.settimeout import settimeout
+    globals()['settimeout'] = settimeout
+
+    return settimeout(function, delay, repeat, args, kwargs)
