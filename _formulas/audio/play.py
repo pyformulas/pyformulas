@@ -1,5 +1,7 @@
 class play:
     def __init__(self, wavedata, bitrate=None, duration=None, block=False):
+        import pyformulas as pf
+
         self.wavedata = wavedata
         self.bitrate = bitrate
         self.duration = duration
@@ -7,7 +9,7 @@ class play:
         if block:
             self._play()
         else:
-            self._play_thread(self).start()
+            pf.thread(self._play)
 
     def _play(self):
         from pyaudio import PyAudio
@@ -34,20 +36,3 @@ class play:
         stream.stop_stream()
         stream.close()
         pa.terminate()
-
-    from threading import Thread
-    class _play_thread(Thread):
-        def __init__(self, parent):
-            from threading import Thread
-            Thread.__init__(self)
-
-            self.parent = parent
-
-        def run(self):
-            self.parent._play()
-
-            # def stop(self):
-            #    """ Graceful shutdown """
-            #    self._stop.set()
-            #    self.stream.close()
-            #    self.p.terminate()

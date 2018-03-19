@@ -21,3 +21,9 @@ def download(url, out_path=None, get_headers=False, get_body=None):
     globals()['download'] = download
 
     return download(url, out_path, get_headers, get_body)
+
+def thread(function, args=(), kwargs={}):
+    from _formulas.thread import thread
+    globals()['thread'] = thread
+
+    return thread(function, args, kwargs)
