@@ -6,7 +6,7 @@ def screen(canvas=None, title='Display'):
     Creates a high framerate window for displaying numpy.ndarray image data. To update the window contents, *self.update()* must be called.
     """
 
-    from _formulas.screen import screen
+    from ._formulas.screen import screen
     globals()['screen'] = screen
 
     return screen(canvas, title)
@@ -19,7 +19,7 @@ def _play(wavedata, bitrate=None, duration=None, block=False):
     If *block* is False, then plays the audio in a separate thread.
     """
 
-    from _formulas.audio.play import play
+    from ._formulas.audio.play import play
     globals()['audio'].play = play
 
     return play(wavedata, bitrate, duration, block)
@@ -33,7 +33,7 @@ def download(url, out_path=None, get_headers=False, get_body=None):
     If a location is set in *out_path*, then saves the response to that location.
     """
 
-    from _formulas.download import download
+    from ._formulas.download import download
     globals()['download'] = download
 
     return download(url, out_path, get_headers, get_body)
@@ -45,7 +45,7 @@ def thread(function, args=(), kwargs={}, callback=None):
     If *callback* is set, then passes *function*'s return value to *callback*.
     """
 
-    from _formulas.thread import thread
+    from ._formulas.thread import thread
     globals()['thread'] = thread
 
     return thread(function, args, kwargs)
@@ -55,7 +55,7 @@ def settimeout(function, delay, repeat=False, args=(), kwargs={}):
     Calls *function* after *delay*. If *repeat* is True, then calls *function* repeatedly every *delay* seconds.
     """
 
-    from _formulas.settimeout import settimeout
+    from ._formulas.settimeout import settimeout
     globals()['settimeout'] = settimeout
 
     return settimeout(function, delay, repeat, args, kwargs)
