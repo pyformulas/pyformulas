@@ -1,3 +1,7 @@
+"""
+Creates audio waveforms (type uint8), then plays them with pf.audio.play()
+"""
+
 import numpy as np
 import pyformulas as pf
 from time import sleep

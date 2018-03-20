@@ -1,3 +1,7 @@
+"""
+Basic multithreading with pf.thread
+"""
+
 import pyformulas as pf
 import time
 

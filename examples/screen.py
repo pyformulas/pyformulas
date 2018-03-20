@@ -1,3 +1,7 @@
+"""
+Draws animated image frames to a window with pf.screen, along with an audio stream (pf.audio.play())
+"""
+
 import pyformulas as pf
 import numpy as np
 import time

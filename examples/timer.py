@@ -1,3 +1,7 @@
+"""
+Creating a multithreaded timer with callbacks using pf.settimeout()
+"""
+
 import pyformulas as pf
 import time
 

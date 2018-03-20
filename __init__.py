@@ -1,4 +1,4 @@
-class Class:
+class object:
     pass
 
 def screen(canvas=None, title='Display'):
@@ -7,7 +7,7 @@ def screen(canvas=None, title='Display'):
 
     return screen(canvas, title)
 
-audio = Class()
+audio = object()
 def _play(wavedata, bitrate=None, duration=None, block=False):
     from _formulas.audio.play import play
     globals()['audio'].play = play
