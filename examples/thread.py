@@ -9,9 +9,9 @@ def count_to(num):
     for i in range(1, num+1):
         print("%i..." % i)
 
-        time.sleep(1)
+        time.sleep(0.5)
 
 pf.thread(count_to, (10,))
 
-time.sleep(5)
+time.sleep(2.5)
 print("foo")

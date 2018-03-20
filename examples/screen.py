@@ -7,19 +7,20 @@ import numpy as np
 import time
 
 def get_audio(duration):
+    frequencies = [1, 150, 3, 200, 250]
+
     bitrate = 3.6e5
+    duration = 10
     num_samples = round(bitrate / 8 * duration)
 
-    bass = np.sin(np.linspace(0, 90 * duration * 2 * np.pi, num_samples))
-    mids = np.sin(np.linspace(0, 100 * duration * 2 * np.pi, num_samples))
-    highs = np.sin(np.linspace(0, 105 * duration * 2 * np.pi, num_samples))
+    waveforms = [np.cos(np.linspace(0, frequency * duration * 2 * np.pi, num_samples)) for frequency in frequencies]
 
-    song = (bass + mids + highs)
-    song /= np.max(song)
+    audio = np.multiply(*waveforms[:2]) + np.e**np.multiply(*waveforms[2:])
 
-    wavedata = np.rint(song * 127.5 + 127.5).astype(np.uint8)
+    audio /= audio[0]
+    audio = np.floor(audio * 127.5 + 127.5).astype(np.uint8)
 
-    return wavedata
+    return audio
 
 wavedata = get_audio(10)
 
