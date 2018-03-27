@@ -59,3 +59,14 @@ def settimeout(function, delay, repeat=False, args=(), kwargs={}):
     globals()['settimeout'] = settimeout
 
     return settimeout(function, delay, repeat, args, kwargs)
+
+net = object()
+def _Stream(port, address=None):
+    """
+    """
+
+    from ._formulas.net.Stream import Stream
+    globals()['net'].Stream = Stream
+
+    return Stream(port, address)
+net.Stream = _Stream
