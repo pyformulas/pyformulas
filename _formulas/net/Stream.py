@@ -21,8 +21,27 @@ class thread(Thread):  # TODO: Have to include thread here due to a starnge bug
             self.callback(*self.result)
 
 class Stream:
-    #def __new__(self, port, *args, address=None, block=False, **kwargs):
-    def __new__(self, port, address=None):
+    ##def __new__(self, port, *args, address=None, block=False, **kwargs):
+    #def __new__(self, port, address=None):
+    #    #kwargs['address'] = address
+    #    #kwargs['block'] = block
+    #    #self._params = ((port,) + args), kwargs
+
+    #    self.port = port
+    #    self.address = address
+
+    #    import socket
+    #    self._socket = socket
+    #    self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    #    if address is None:
+    #        self._make_server(self)
+    #    else:
+    #        self._make_client(self)
+
+    #    return self
+
+    def __init__(self, port, address=None):
         #kwargs['address'] = address
         #kwargs['block'] = block
         #self._params = ((port,) + args), kwargs
@@ -37,24 +56,24 @@ class Stream:
         if address is None:
             self._make_server(self)
         else:
-            self._make_client(self)
+            self._make_client()
 
 
     ######## Dummy functions ########
 
-    def send(self, bytes):
+    #def send(self, bytes):
+    #    pass
+
+    #def disconnect(self):
+    #    pass
+
+    def on_receive(self, conn, buffer):
         pass
 
-    def disconnect(self):
+    def on_connect(self, conn):
         pass
 
-    def on_receive(self, buffer):
-        pass
-
-    def on_connect(self):
-        pass
-
-    def on_disconnect(self):
+    def on_disconnect(self, conn):
         pass
 
     ##################################
@@ -105,7 +124,7 @@ class Stream:
             self.socket.send(bytes)
 
         def _recv_loop(self):
-            while len(self._select([self.socket], [], [], 0)[0]) == 0:# Wait for the socket to become readable
+            while self.socket.fileno() != -1 and len(self._select([self.socket], [], [], 0)[0]) == 0:# Wait for the socket to become readable
                 #print('waiting')
                 self._sleep(1e-9)
 
@@ -118,6 +137,7 @@ class Stream:
                     buffer = self.socket.recv(4096)
                 except ConnectionAbortedError:# Peer disconnected?
                     #print("connection aborted")
+                    self.disconnect()
                     break
 
                 if len(buffer) > 0:
