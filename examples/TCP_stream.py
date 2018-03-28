@@ -1,6 +1,6 @@
 import pyformulas as pf
 
-class download_google(pf.net.Stream):
+class play_chess(pf.net.Stream):
     def on_connect(self):
         self.send(bytes('DeepBlue\n\n', 'utf-8'))
 
@@ -8,4 +8,4 @@ class download_google(pf.net.Stream):
         text = buffer.decode('utf-8', 'ignore')
         print(text)
 
-download_google(port=23, address='freechess.org')
+play_chess(port=23, address='freechess.org')
