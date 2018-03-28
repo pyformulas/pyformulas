@@ -16,7 +16,7 @@ Downloads a file from a web address
 Runs a function at a specified interval, in separate threads
 
 * #### pf.net.Stream
-Creates a socket for sending/receiving data over the internet
+Creates TCP network connections
 
 * #### pf.audio.play()
 Play an 8-bit audio sequence (single-channel)
