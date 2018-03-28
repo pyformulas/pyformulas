@@ -1,6 +1,6 @@
 # pyformulas
 ### A library of ready-to-go Python formulas
-##### Accepting formulas from new contributors (if approved).
+##### Accepting formulas from new contributors (upon approval).
 ------
 #### Formulas:
 
