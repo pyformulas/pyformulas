@@ -84,7 +84,7 @@ class Stream:
             self.parent = parent
 
             self.parent.socket.bind(('', self.parent.port))
-            max_connections = 1
+            max_connections = 10
             self.parent.socket.listen(max_connections)
 
             self.parent.connections = []
