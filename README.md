@@ -1,5 +1,7 @@
 # pyformulas
 ### A library of ready-to-go Python formulas 
+##### Accepting formulas from new contributors (if approved).
+------
 #### Formulas:
 * #### pf.screen()
 Displays a dynamic NumPy canvas in a multi-threaded window
