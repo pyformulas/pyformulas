@@ -13,11 +13,11 @@ Runs a function at a specified interval, in separate threads
 * #### pf.download()
 Downloads a file from a web address
 
-* #### pf.net.Stream
-Creates a TCP network connection
-
 * #### pf.screen()
 Displays a dynamic NumPy canvas in a multi-threaded window
+
+* #### pf.net.Stream
+Creates a TCP network connection
 
 * #### pf.audio.play()
 Play an 8-bit audio sequence (single-channel)
