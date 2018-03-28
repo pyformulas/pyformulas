@@ -39,9 +39,6 @@ class Stream:
         else:
             self._make_client(self)
 
-    #def __init__(self, port, *args, address=None, block=False, **kwargs):
-        #pass
-
 
     ######## Dummy functions ########
 

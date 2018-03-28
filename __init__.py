@@ -61,12 +61,5 @@ def settimeout(function, delay, repeat=False, args=(), kwargs={}):
     return settimeout(function, delay, repeat, args, kwargs)
 
 net = object()
-def _Stream(port, address=None):
-    """
-    """
-
-    from ._formulas.net.Stream import Stream
-    globals()['net'].Stream = Stream
-
-    return Stream(port, address)
+from ._formulas.net.Stream import Stream as _Stream # Import directly since used as a class
 net.Stream = _Stream
