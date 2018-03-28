@@ -14,7 +14,7 @@ Runs a function at a specified interval, in separate threads
 Downloads a file from a web address
 
 * #### pf.net.Stream
-Creates TCP network connections
+Creates a TCP network connection
 
 * #### pf.screen()
 Displays a dynamic NumPy canvas in a multi-threaded window
