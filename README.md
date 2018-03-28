@@ -11,7 +11,7 @@ Runs a function in a separate thread
 Downloads a file from a web address
 
 * #### pf.settimeout()
-Runs a function at a specified interval in a separate thread
+Runs a function at a specified interval, in separate threads
 
 * #### pf.net.Stream
 Creates a socket for sending/receiving data over the internet
