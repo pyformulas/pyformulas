@@ -53,19 +53,18 @@ class Stream:
         self._socket = socket
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
+        self.connections = []
+
         if address is None:
+            self._isserver = True
             self._make_server(self)
         else:
+            self._isserver = False
             self._make_client()
 
 
     ######## Dummy functions ########
 
-    #def send(self, bytes):
-    #    pass
-
-    #def disconnect(self):
-    #    pass
 
     def on_receive(self, conn, buffer):
         pass
@@ -84,22 +83,37 @@ class Stream:
             self.parent = parent
 
             self.parent.socket.bind(('', self.parent.port))
-            max_connections = 10
+            max_connections = 5
             self.parent.socket.listen(max_connections)
 
-            self.parent.connections = []
-
             for i in range(max_connections):
-                thread(self.parent.socket.accept, self.accept_callback)
+                thread(self.parent._accept, self.parent._accept_callback)
 
-        def accept_callback(self, socket, address):
-            connection = self.parent.Connection(self.parent, socket)
+    def _accept(self):
+        try:
+            return self.socket.accept()
+        except OSError:
+            return None, None
 
-            self.parent.connections.append(connection)
+    def _accept_callback(self, socket, address):
+        if socket is None:
+            return
+
+        connection = self.Connection(self, socket)
+        self.connections.append(connection)
 
     def _make_client(self):
         self.socket.connect((self.address, self.port))
         connection = self.Connection(self, self.socket)
+        self.connections.append(connection)
+
+    def shutdown(self):# TODO: may break _recv_loop
+        for conn in self.connections:
+            if conn.socket.fileno() != -1:
+                conn.socket.close()
+
+        if self.socket.fileno() != -1:
+            self.socket.close()
 
     class Connection:
         def __init__(self, stream, socket):
@@ -119,6 +133,12 @@ class Stream:
         def disconnect(self):
             self.socket.close()
             self.stream.on_disconnect(self)
+
+            if self.stream._isserver:
+                if self.stream.socket.fileno() != -1:# Listen for another connection
+                    thread(self.stream._accept, self.stream._accept_callback)
+
+                self.stream.connections.remove(self)
 
         def send(self, bytes):
             self.socket.send(bytes)
