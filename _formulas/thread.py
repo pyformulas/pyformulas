@@ -9,15 +9,14 @@ class thread(Thread):
         self.args = args
         self.kwargs = kwargs
         self.callback = callback
-        self.result = None
 
         self.start()
 
     def run(self):
         self.result = self.function(*self.args, **self.kwargs)
 
-        if not isinstance(self.result, tuple):
-            self.result = (self.result,)
-
         if self.callback is not None:
-            self.callback(*self.result)
+            if isinstance(self.result, tuple):
+                self.callback(*self.result)
+            else:
+                self.callback(self.result)

@@ -11,7 +11,9 @@ def count_to(num):
 
         time.sleep(0.5)
 
-pf.thread(count_to, (10,))
+thread = pf.thread(count_to, (10,))
 
 time.sleep(2.5)
 print("foo")
+thread.join()
+print('Done')
