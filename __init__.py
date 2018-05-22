@@ -61,7 +61,7 @@ def settimeout(function, delay, repeat=False, args=(), kwargs={}):
     return settimeout(function, delay, repeat, args, kwargs)
 
 net = object()
-from ._formulas.net.Stream import Stream as _Stream # Import directly since used as a class
+from ._formulas.net.Stream import Stream as _Stream # Import directly since it's used as a class
 net.Stream = _Stream
 
 def discrete_search(root_obj, expansion_fn, goal_fn, heuristic_fn=None):

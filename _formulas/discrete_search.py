@@ -10,9 +10,6 @@ def discrete_search(root_obj, expansion_fn, goal_fn, heuristic_fn=None):
     """
     def create_node(obj, parent, path_cost, heuristic_cost):
         class Node:
-            #def __gt__(self, other):
-            #    return self.path_cost > other.path_cost
-
             def __lt__(self, other):
                 return self.path_cost + self.heuristic_cost < other.path_cost + other.heuristic_cost
 
@@ -24,6 +21,13 @@ def discrete_search(root_obj, expansion_fn, goal_fn, heuristic_fn=None):
 
         return node
 
+    def get_path(goal_node):
+        solution = [goal_node]
+        while solution[-1].parent is not None:
+            solution.append(solution[-1].parent)
+
+        return [node.obj for node in solution[::-1]]
+
     from sortedcontainers import SortedList
     nodes = SortedList([ create_node(root_obj, None, 0, 0 if heuristic_fn is None else heuristic_fn(root_obj)) ])
     closed_set = set()
@@ -33,6 +37,10 @@ def discrete_search(root_obj, expansion_fn, goal_fn, heuristic_fn=None):
             yield node
 
     while True:
+        #for node in nodes:
+        #    print(get_path(node), node.path_cost, node.path_cost + node.heuristic_cost)
+        #print()
+
         try:
             best_node = nodes.pop(0)
         except IndexError:
@@ -42,7 +50,7 @@ def discrete_search(root_obj, expansion_fn, goal_fn, heuristic_fn=None):
             break
 
         try:
-            if best_node in closed_set:
+            if best_node.obj in closed_set:
                 continue
 
             closed_set.add(best_node.obj)
@@ -56,12 +64,8 @@ def discrete_search(root_obj, expansion_fn, goal_fn, heuristic_fn=None):
 
         heuristic_costs = map((lambda obj:0) if heuristic_fn is None else heuristic_fn, child_objs)
 
-        leaf_nodes = map(create_node, child_objs, node_generator(best_node), step_costs, heuristic_costs)
+        leaf_nodes = map(create_node, child_objs, node_generator(best_node), path_costs, heuristic_costs)
 
         nodes.update(leaf_nodes)
 
-    solution = [best_node]
-    while solution[-1].parent is not None:
-        solution.append(solution[-1].parent)
-
-    return [node.obj for node in solution[::-1]]
+    return get_path(best_node)

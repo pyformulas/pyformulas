@@ -3,7 +3,7 @@ import numpy as np
 import random
 import sympy
 
-initial_state = round( random.random()*1e5 )
+initial_state = round( random.random()*1e6 )
 
 def expansion_fn(state):
     primes_below = np.array(list( sympy.primerange(0, state+1) ))
