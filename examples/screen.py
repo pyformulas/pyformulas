@@ -1,5 +1,5 @@
 """
-Draws animated video frames to a window using pf.screen, along with an audio stream (pf.audio.play())
+Draws a video sequence to a window using pf.screen, along with an audio stream (pf.audio.play())
 """
 
 import pyformulas as pf

@@ -1,3 +1,7 @@
+"""
+Connects to a chess server over telnet, by creating a pf.net.Stream
+"""
+
 import pyformulas as pf
 
 class play_chess(pf.net.Stream):

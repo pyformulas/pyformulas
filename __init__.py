@@ -66,6 +66,12 @@ net.Stream = _Stream
 
 def discrete_search(root_obj, expansion_fn, goal_fn, heuristic_fn=None):
     """
+    Searches for a goal object, starting from an initial object. Uses A* algorithm.
+
+    :param root_obj: Initial object
+    :param expansion_fn: Takes an object and returns (child_objects, step_costs). step_costs is a list of the costs of transitioning to each child.
+    :param goal_fn: Returns whether an object is a goal object
+    :param heuristic_fn: Returns an estimation of the remaining path length between an object and the nearest goal object.
     """
 
     from ._formulas.discrete_search import discrete_search

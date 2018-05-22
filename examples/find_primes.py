@@ -1,3 +1,7 @@
+"""
+Searches for prime numbers using pf.discrete_search (A*)
+"""
+
 import pyformulas as pf
 import numpy as np
 import random
