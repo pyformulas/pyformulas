@@ -1,10 +1,18 @@
+import pyaudio
+
 class play:
-    def __init__(self, wavedata, bitrate=None, duration=None, block=False):
+    def __init__(self, wavedata, bitrate=None, duration=None, num_channels=1, bit_depth=16, block=False):
         import pyformulas as pf
 
-        self.wavedata = wavedata
+        self.wavedata = wavedata if (isinstance(wavedata, bytes) or isinstance(wavedata, bytearray)) else bytes(wavedata)
         self.bitrate = bitrate
         self.duration = duration
+        self.num_channels = num_channels
+
+        formats = {8:pyaudio.paInt8, 16:pyaudio.paInt16, 24:pyaudio.paInt24, 32:pyaudio.paInt32}
+        self.format = formats[bit_depth]
+
+        assert (len(wavedata) % (bit_depth/8*num_channels)) == 0
 
         if block:
             self._play()
@@ -12,9 +20,7 @@ class play:
             pf.thread(self._play)
 
     def _play(self):
-        from pyaudio import PyAudio
-        self.wavedata = bytes(self.wavedata)
-        pa = PyAudio()
+        pa = pyaudio.PyAudio()
 
         if self.bitrate is None and self.duration is None:
             raise ValueError("Must set either bitrate or duration")
@@ -26,8 +32,8 @@ class play:
         sample_rate = round(self.bitrate / 8)
 
         stream = pa.open(
-            format=pa.get_format_from_width(1),
-            channels=1,
+            format=self.format,
+            channels=self.num_channels,
             rate=sample_rate,
             output=True
         )

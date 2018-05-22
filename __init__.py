@@ -12,7 +12,7 @@ def screen(canvas=None, title='Display'):
     return screen(canvas, title)
 
 audio = object()
-def _play(wavedata, bitrate=None, duration=None, block=False):
+def _play(wavedata, bitrate=None, duration=None, num_channels=1, bit_depth=2, block=False):
     """
     Plays a stream of mono 8-bit audio. (Stereo streams not supported yet)
 
@@ -22,7 +22,7 @@ def _play(wavedata, bitrate=None, duration=None, block=False):
     from ._formulas.audio.play import play
     globals()['audio'].play = play
 
-    return play(wavedata, bitrate, duration, block)
+    return play(wavedata, bitrate, duration, num_channels, bit_depth, block)
 audio.play = _play
 
 
