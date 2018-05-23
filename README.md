@@ -20,4 +20,4 @@ Displays a dynamic NumPy canvas in a multi-threaded window
 Creates a TCP network connection
 
 * #### pf.audio.play()
-Play an 8-bit audio sequence (single-channel)
+Plays a PCM audio stream (e.g. a bytearray, numpy array, etc)
