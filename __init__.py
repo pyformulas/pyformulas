@@ -78,3 +78,9 @@ def discrete_search(root_obj, expansion_fn, goal_fn, heuristic_fn=None):
     globals()['discrete_search'] = discrete_search
 
     return discrete_search(root_obj, expansion_fn, goal_fn, heuristic_fn)
+
+def plot(x, y, color='blue', block=False, title=None, xlim=None, ylim=None, xlabel=None, ylabel=None):
+    from ._formulas.plot import plot
+    globals()['plot'] = plot
+
+    return plot(x, y, color, block, title, xlim, ylim, xlabel, ylabel)
