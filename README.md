@@ -10,6 +10,9 @@ Runs a function in a separate thread
 * #### pf.screen()
 Displays a dynamic NumPy canvas in a multi-threaded window
 
+* #### pf.audio.play()
+Plays a PCM audio stream (e.g. a bytearray, numpy array, etc)
+
 * #### pf.plot()
 Plots a graph (using Matplotlib as backend)
 
