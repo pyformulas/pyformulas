@@ -16,9 +16,6 @@ Plays a PCM audio stream (e.g. a bytearray, numpy array, etc)
 * #### pf.plot()
 Plots a graph (using Matplotlib as backend)
 
-* #### pf.audio.play()
-Plays a PCM audio stream (e.g. a bytearray, numpy array, etc)
-
 * #### pf.settimeout()
 Runs a function at a specified interval, in separate threads
 
